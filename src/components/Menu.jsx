@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import Tube from "../img/youtube.png";
 import HomeIcon from '@mui/icons-material/Home';
-import LocalFireDepartmentOutlinedIcon from '@mui/icons-material/LocalFireDepartmentOutlined';import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
+import LocalFireDepartmentOutlinedIcon from '@mui/icons-material/LocalFireDepartmentOutlined'; import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import LibraryMusicOutlinedIcon from "@mui/icons-material/LibraryMusicOutlined";
@@ -18,7 +18,7 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import { axiosInstance } from "../config";
 
 
 const Container = styled.div`
@@ -72,16 +72,16 @@ border-radius: 10px;
 &:hover {
   background-color: ${({ theme }) => theme.soft};
 }
-`
+`;
 
 const Hr = styled.hr`
 margin: 15px 0px;
-border: 0.5px solid ${({theme}) => theme.soft};
-`
+border: 0.5px solid ${({ theme }) => theme.soft};
+`;
 
 const Login = styled.div`
 
-`
+`;
 
 const Button = styled.button`
 padding: 5px 15px;
@@ -100,88 +100,87 @@ gap: 5px;
   background-color: #3ea6ff;
   color: white;
 }
-`
+`;
 
 const Title = styled.h2`
 font-size: 14px;
 font-weight: 500;
 color: #aaaaaa;
 margin-bottom: 20px;
-`
+`;
 
 const Avatar = styled.img`
 width: 24px;
 height: 24px;
 border-radius: 50%;
 background-color: #999;
-`
+`;
 
-const Menu = ({darkMode, setDarkMode}) => {
-  
-  const {currentUser} = useSelector(state=>state.user);
+const Menu = ({ darkMode, setDarkMode }) => {
+
+  const { currentUser } = useSelector(state => state.user);
   const [err, setErr] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    const fetchUsers = async ()=>{
-      try{
-       
+    const fetchUsers = async () => {
+      try {
+
         // Get users' details for pic and name
-        const array = await Promise.all(currentUser.subscribedUsers.map( async(user) => {
-          const res = await axios.get(`/users/find/${user}`);
+        const array = await Promise.all(currentUser.subscribedUsers.map(async (user) => {
+          const res = await axiosInstance.get(`/users/find/${user}`);
           return res.data;
         }));
         setUserDetails(array);
-      } catch(err) {
+      } catch (err) {
         setErr(true);
       }
     };
-    if (currentUser)
-    {
+    if (currentUser) {
       fetchUsers();
     }
-  },[currentUser])
+  }, [currentUser]);
 
   const handleMode = () => {
     localStorage.setItem("darkMode", !darkMode);
     setDarkMode(!darkMode);
-  }
+  };
 
   return (
     <Container>
-        <Wrapper>
-        <Link to="/" style={{textDecoration:"none", color: "inherit"}}>
-            <Logo>
-                <Img src={Tube}/>
-                ShayTube
-            </Logo>
-            </Link>
-            <Link to="/" style={{textDecoration:"none", color: "inherit"}}>
-        <Item>
-          <HomeIcon />
-          Home
-        </Item>
+      <Wrapper>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Logo>
+            <Img src={Tube} />
+            ShayTube
+          </Logo>
         </Link>
-        <Link to="/trend" style={{textDecoration:"none", color: "inherit"}}>
-        <Item>
-          <LocalFireDepartmentOutlinedIcon />
-          Hot Videos
-        </Item>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Item>
+            <HomeIcon />
+            Home
+          </Item>
         </Link>
-        {currentUser && (<Link to="/subscriptions" style={{textDecoration:"none", color: "inherit"}}>
-        <Item>
-          <SubscriptionsOutlinedIcon />
-          Subscriptions
-        </Item>
-        {userDetails.map((user) => (
-          <Link key={user._id} to={"/user"} state={{id: user._id, name:user.name}} style={{textDecoration:"none", color: "inherit"}}>
-        <Item > 
-            <Avatar  src={user.img}/>
-            {user.name}
-        </Item>
-          </Link>))}
+        <Link to="/trend" style={{ textDecoration: "none", color: "inherit" }}>
+          <Item>
+            <LocalFireDepartmentOutlinedIcon />
+            Hot Videos
+          </Item>
+        </Link>
+        {currentUser && (<Link to="/subscriptions" style={{ textDecoration: "none", color: "inherit" }}>
+          <Item>
+            <SubscriptionsOutlinedIcon />
+            Subscriptions
+          </Item>
+          {userDetails.map((user) => (
+            <Link key={user._id} to={"/user"} state={{ id: user._id, name: user.name }} style={{ textDecoration: "none", color: "inherit" }}>
+              <Item >
+                <Avatar src={user.img} />
+                {user.name}
+              </Item>
+            </Link>))}
         </Link>)}
         <Hr />
         <Item>
@@ -193,37 +192,37 @@ const Menu = ({darkMode, setDarkMode}) => {
           History
         </Item>
         <Hr />
-        { !currentUser && 
+        {!currentUser &&
           <><Login>
             Sign in to like videos, comment, and subscribe
-            <Link to="/signin" style={{textDecoration:"none"}}>
-            <Button><AccountCircleOutlinedIcon /> SIGN IN</Button>
+            <Link to="/signin" style={{ textDecoration: "none" }}>
+              <Button><AccountCircleOutlinedIcon /> SIGN IN</Button>
             </Link>
-        </Login>
-        <Hr /></>
+          </Login>
+            <Hr /></>
         }
         <Title>What's New</Title>
-        <Item onClick={()=> navigate(`/tags?tags=music`)}>
+        <Item onClick={() => navigate(`/tags?tags=music`)}>
           <LibraryMusicOutlinedIcon />
           Music
         </Item>
-         <Item onClick={()=> navigate(`/tags?tags=sports`)}>
+        <Item onClick={() => navigate(`/tags?tags=sports`)}>
           <SportsBasketballOutlinedIcon />
           Sports
         </Item>
-         <Item onClick={()=> navigate(`/tags?tags=gaming`)}>
+        <Item onClick={() => navigate(`/tags?tags=gaming`)}>
           <SportsEsportsOutlinedIcon />
           Gaming
         </Item>
-         <Item onClick={()=> navigate(`/tags?tags=movies`)}>
+        <Item onClick={() => navigate(`/tags?tags=movies`)}>
           <MovieOutlinedIcon />
           Movies
         </Item>
-         <Item onClick={()=> navigate(`/tags?tags=news`)}>
+        <Item onClick={() => navigate(`/tags?tags=news`)}>
           <ArticleOutlinedIcon />
           News
         </Item>
-         <Item onClick={()=> navigate(`/tags?tags=live`)}>
+        <Item onClick={() => navigate(`/tags?tags=live`)}>
           <LiveTvOutlinedIcon />
           Live
         </Item>
@@ -244,9 +243,9 @@ const Menu = ({darkMode, setDarkMode}) => {
           <SettingsBrightnessOutlinedIcon />
           {darkMode ? "Light" : "Dark"} Mode
         </Item>
-        </Wrapper>
+      </Wrapper>
     </Container>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
