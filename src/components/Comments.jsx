@@ -98,7 +98,7 @@ const Comments = ({ videoId }) => {
           </Details>
           <button style={{ width: "100px", height: "30px", border: "none", borderRadius: "5px", backgroundColor: "#3ea6ff", color: "white", marginLeft: "auto", cursor: "pointer" }} id="commentButton" hidden="hidden" onClick={handleComment}>Comment</button>
         </NewComment>)}
-      {comments.map((comment) => (
+      {comments?.map((comment) => (
         <Comment key={comment._id} comment={comment} />
       ))}
     </Container>

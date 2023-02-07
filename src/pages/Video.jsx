@@ -207,9 +207,9 @@ const Video = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <VideoFrame src={currentVideo.videoUrl} controls />
+          <VideoFrame src={currentVideo?.videoUrl} controls />
         </VideoWrapper>
-        <Title>{currentVideo.title}</Title>
+        <Title>{currentVideo?.title}</Title>
         <Channel>
           <ChannelInfo>
             <Image src={channel.img} />
@@ -222,10 +222,10 @@ const Video = () => {
           {(currentUser && channel._id !== currentUser._id) && <Subscribe onClick={handleSub}>{currentUser.subscribedUsers?.includes(channel._id) ? "SUBSCRIBED" : "SUBSCRIBE"}</Subscribe>}
           <Buttons>
             <Button onClick={handleLike}>
-              {currentVideo.likes?.includes(currentUser?._id) ? <ThumbUpIcon /> : <ThumbUpOutlined />} {currentVideo.likes?.length}
+              {currentVideo?.likes?.includes(currentUser?._id) ? <ThumbUpIcon /> : <ThumbUpOutlined />} {currentVideo?.likes?.length}
             </Button>
             <Button onClick={handleDislike}>
-              {currentVideo.dislikes.includes(currentUser?._id) ? <ThumbDownIcon /> : <ThumbDownOutlined />} Dislike
+              {currentVideo?.dislikes.includes(currentUser?._id) ? <ThumbDownIcon /> : <ThumbDownOutlined />} Dislike
             </Button>
             <Button>
               <ReplyOutlined /> Share
@@ -236,14 +236,14 @@ const Video = () => {
           </Buttons>
         </Channel>
         <Details>
-          <Info>{currentVideo.views} views • {format(currentVideo.createdAt)}</Info>
+          <Info>{currentVideo?.views} views • {format(currentVideo?.createdAt)}</Info>
           <Description>
-            {currentVideo.desc}
+            {currentVideo?.desc}
           </Description>
         </Details>
-        <Comments videoId={currentVideo._id} />
+        <Comments videoId={currentVideo?._id} />
       </Content>
-      <Rec tags={currentVideo.tags} />
+      <Rec tags={currentVideo?.tags} />
     </Container>
   );
 };
