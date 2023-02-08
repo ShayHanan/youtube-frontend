@@ -73,7 +73,11 @@ const Card = ({ type, video }) => {
   useEffect(() => {
     const fetchChannel = async () => {
       try {
-        const res = await axiosInstance.get(`/users/find/${video.userId}`);
+        const res = await axiosInstance.get(`/users/find/${video.userId}`, {
+          headers: {
+            test: "test"
+          }
+        });
         setChannel(res.data);
       } catch (err) {
         setErr(true);
