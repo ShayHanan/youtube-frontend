@@ -174,14 +174,22 @@ const Video = () => {
 
   const handleLike = async () => {
     if (currentUser) {
-      setLikes(await axiosInstance.put(`/users/like/${currentVideo._id}`));
+      setLikes(await axiosInstance.put(`/users/like/${currentVideo._id}`, {}, {
+        headers: {
+          token: "Bearer " + JSON.parse(localStorage.getItem("user")).token,
+        }
+      }));
       dispatch(like(currentUser._id));
     }
   };
 
   const handleDislike = async () => {
     if (currentUser) {
-      setDislikes(await axiosInstance.put(`/users/dislike/${currentVideo._id}`));
+      setDislikes(await axiosInstance.put(`/users/dislike/${currentVideo._id}`, {}, {
+        headers: {
+          token: "Bearer " + JSON.parse(localStorage.getItem("user")).token,
+        }
+      }));
       dispatch(dislike(currentUser._id));
     }
   };
@@ -189,14 +197,26 @@ const Video = () => {
   const handleSub = async () => {
     // if user already subbed then unsub him, else sub
     currentUser.subscribedUsers.includes(channel._id) ?
-      await axiosInstance.put(`/users/unsub/${channel._id}`) : await axiosInstance.put(`/users/sub/${channel._id}`);
+      await axiosInstance.put(`/users/unsub/${channel._id}`, {}, {
+        headers: {
+          token: "Bearer " + JSON.parse(localStorage.getItem("user")).token,
+        }
+      }) : await axiosInstance.put(`/users/sub/${channel._id}`, {}, {
+        headers: {
+          token: "Bearer " + JSON.parse(localStorage.getItem("user")).token,
+        }
+      });
     dispatch(subscription(channel._id));
 
   };
 
   const handleDelete = async () => {
     try {
-      await axiosInstance.delete(`/videos/${path}`);
+      await axiosInstance.delete(`/videos/${path}`, {}, {
+        headers: {
+          token: "Bearer " + JSON.parse(localStorage.getItem("user")).token,
+        }
+      });
       window.location.replace("/");
     } catch (err) {
 

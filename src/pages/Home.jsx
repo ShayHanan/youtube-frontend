@@ -24,7 +24,11 @@ const Home = ({ type }) => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const res = await axiosInstance.get(`/videos/${type}`);
+        const res = await axiosInstance.get(`/videos/${type}`, {
+          headers: {
+            token: "Bearer " + JSON.parse(localStorage.getItem("user"))?.token,
+          }
+        });
         setVideos(res.data);
       } catch (err) {
         setErr(true);

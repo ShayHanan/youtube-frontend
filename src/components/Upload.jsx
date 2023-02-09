@@ -139,7 +139,11 @@ const Upload = ({ setOpen }) => {
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
-      const res = await axiosInstance.post("/videos", { ...inputs, tags });
+      const res = await axiosInstance.post("/videos", { ...inputs, tags }, {
+        headers: {
+          token: "Bearer " + JSON.parse(localStorage.getItem("user")).token,
+        }
+      });
       setOpen(false);
       navigate(`/video/${res.data._id}`);
     } catch (err) {
@@ -157,7 +161,7 @@ const Upload = ({ setOpen }) => {
         <Input type="text" placeholder="Title" name="title" onChange={handleChange} />
         <Desc placeholder="Description" rows={8} name="desc" onChange={handleChange} />
         <Type>Tags</Type>
-        <Input type="text" placeholder="Seperate the tags with commas." onChange={e => setTags(e.target.value.split(",").toLowerCase())} />
+        <Input type="text" placeholder="Seperate the tags with commas." onChange={e => setTags(e.target.value.toLowerCase().split(","))} />
         <Type>Thumbnail</Type>
         {imgPerc > 0 ? ("Uploading: " + imgPerc + "%") : (<Input type="file" accept="image/*" onChange={e => setImg(e.target.files[0])} />)}
         {imgPerc === 100 && videoPerc === 100 ? <Button onClick={handleUpload}>Upload</Button> : ""}

@@ -63,7 +63,11 @@ const Comments = ({ videoId }) => {
   const handleComment = async (e) => {
     try {
       // send comment to database
-      const newComment = await axiosInstance.post("/comments", { desc: comment, videoId });
+      const newComment = await axiosInstance.post("/comments", { desc: comment, videoId }, {
+        headers: {
+          token: "Bearer " + JSON.parse(localStorage.getItem("user")).token,
+        }
+      });
       // add comment to state
       dispatch(addComment(newComment.data));
       // clear input
