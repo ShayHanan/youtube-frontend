@@ -212,7 +212,7 @@ const Video = () => {
 
   const handleDelete = async () => {
     try {
-      await axiosInstance.delete(`/videos/${path}`, {}, {
+      await axiosInstance.delete(`/videos/${path}`, {
         headers: {
           token: "Bearer " + JSON.parse(localStorage.getItem("user")).token,
         }
