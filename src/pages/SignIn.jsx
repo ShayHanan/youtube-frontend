@@ -107,6 +107,16 @@ const SignIn = () => {
       dispatch(loginFailure());
     });
   };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      await axiosInstance.post("auth/signup", { name, email, password });
+      window.location.replace("/signin");
+    } catch (error) {
+
+    }
+  };
   return (
     <Container>
       <Wrapper>
@@ -121,7 +131,7 @@ const SignIn = () => {
         <Input placeholder="username" onChange={e => setName(e.target.value)} />
         <Input placeholder="email" onChange={e => setEmail(e.target.value)} />
         <Input type="password" placeholder="password" onChange={e => setPassword(e.target.value)} />
-        <Button>Sign Up</Button>
+        <Button onClick={handleRegister}>Sign Up</Button>
       </Wrapper>
       <More>
         English(USA)
