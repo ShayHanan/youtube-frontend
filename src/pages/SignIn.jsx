@@ -112,7 +112,7 @@ const SignIn = () => {
     e.preventDefault();
     try {
       await axiosInstance.post("auth/signup", { name, email, password });
-      window.location.replace("/signin");
+      navigate("/signin");
     } catch (error) {
 
     }
