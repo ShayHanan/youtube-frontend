@@ -34,8 +34,16 @@ top: 0; /* Stay at the top */
 left: 0;
 width: 216px;
 
+@media (max-width: 768px) {
+    width: 90px;
+}
+
 &::-webkit-scrollbar {
    width: 7px;
+
+   @media (max-width: 768px) {
+    width: 3px;
+}
 }
 
 &::-webkit-scrollbar-thumb {
@@ -47,6 +55,10 @@ width: 216px;
 
 const Wrapper = styled.div`
 padding: 18px 26px;
+
+@media (max-width: 768px) {
+    padding: 10px 10px;
+}
 `;
 
 const Logo = styled.div`
@@ -69,8 +81,19 @@ cursor: pointer;
 padding: 7.5px 0px;
 border-radius: 10px;
 
+@media (max-width: 768px) {
+    gap: 3px;
+    font-size: 9px;
+}
+
 &:hover {
   background-color: ${({ theme }) => theme.soft};
+}
+
+.icon {
+  @media (max-width: 768px) {
+    font-size: 15px;
+}
 }
 `;
 
@@ -80,7 +103,9 @@ border: 0.5px solid ${({ theme }) => theme.soft};
 `;
 
 const Login = styled.div`
-
+@media (max-width: 768px) {
+    font-size: 10px;
+}
 `;
 
 const Button = styled.button`
@@ -100,6 +125,11 @@ gap: 5px;
   background-color: #3ea6ff;
   color: white;
 }
+
+@media (max-width: 768px) {
+  padding: 3px 10px;
+  font-size: 10px;
+}
 `;
 
 const Title = styled.h2`
@@ -107,6 +137,11 @@ font-size: 14px;
 font-weight: 500;
 color: #aaaaaa;
 margin-bottom: 20px;
+
+@media (max-width: 768px) {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
 `;
 
 const Avatar = styled.img`
@@ -159,19 +194,19 @@ const Menu = ({ darkMode, setDarkMode }) => {
         </Link>
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Item>
-            <HomeIcon />
+            <HomeIcon className="icon" />
             Home
           </Item>
         </Link>
         <Link to="/trend" style={{ textDecoration: "none", color: "inherit" }}>
           <Item>
-            <LocalFireDepartmentOutlinedIcon />
+            <LocalFireDepartmentOutlinedIcon className="icon" />
             Hot Videos
           </Item>
         </Link>
         {currentUser && (<Link to="/subscriptions" style={{ textDecoration: "none", color: "inherit" }}>
           <Item>
-            <SubscriptionsOutlinedIcon />
+            <SubscriptionsOutlinedIcon className="icon" />
             Subscriptions
           </Item>
           {userDetails.map((user) => (
@@ -184,11 +219,11 @@ const Menu = ({ darkMode, setDarkMode }) => {
         </Link>)}
         <Hr />
         <Item>
-          <VideoLibraryOutlinedIcon />
+          <VideoLibraryOutlinedIcon className="icon" />
           Library
         </Item>
         <Item>
-          <HistoryOutlinedIcon />
+          <HistoryOutlinedIcon className="icon" />
           History
         </Item>
         <Hr />
@@ -196,51 +231,51 @@ const Menu = ({ darkMode, setDarkMode }) => {
           <><Login>
             Sign in to like videos, comment, subscribe, upload videos and more!
             <Link to="/signin" style={{ textDecoration: "none" }}>
-              <Button><AccountCircleOutlinedIcon /> SIGN IN</Button>
+              <Button><AccountCircleOutlinedIcon className="icon" /> SIGN IN</Button>
             </Link>
           </Login>
             <Hr /></>
         }
         <Title>What's New</Title>
         <Item onClick={() => navigate(`/tags?tags=music`)}>
-          <LibraryMusicOutlinedIcon />
+          <LibraryMusicOutlinedIcon className="icon" />
           Music
         </Item>
         <Item onClick={() => navigate(`/tags?tags=sports`)}>
-          <SportsBasketballOutlinedIcon />
+          <SportsBasketballOutlinedIcon className="icon" />
           Sports
         </Item>
         <Item onClick={() => navigate(`/tags?tags=gaming`)}>
-          <SportsEsportsOutlinedIcon />
+          <SportsEsportsOutlinedIcon className="icon" />
           Gaming
         </Item>
         <Item onClick={() => navigate(`/tags?tags=movies`)}>
-          <MovieOutlinedIcon />
+          <MovieOutlinedIcon className="icon" />
           Movies
         </Item>
         <Item onClick={() => navigate(`/tags?tags=news`)}>
-          <ArticleOutlinedIcon />
+          <ArticleOutlinedIcon className="icon" />
           News
         </Item>
         <Item onClick={() => navigate(`/tags?tags=live`)}>
-          <LiveTvOutlinedIcon />
+          <LiveTvOutlinedIcon className="icon" />
           Live
         </Item>
         <Hr />
         <Item>
-          <SettingsOutlinedIcon />
+          <SettingsOutlinedIcon className="icon" />
           Settings
         </Item>
         <Item>
-          <FlagOutlinedIcon />
+          <FlagOutlinedIcon className="icon" />
           Report
         </Item>
         <Item>
-          <HelpOutlineOutlinedIcon />
+          <HelpOutlineOutlinedIcon className="icon" />
           Help
         </Item>
         <Item onClick={handleMode} >
-          <SettingsBrightnessOutlinedIcon />
+          <SettingsBrightnessOutlinedIcon className="icon" />
           {darkMode ? "Light" : "Dark"} Mode
         </Item>
       </Wrapper>

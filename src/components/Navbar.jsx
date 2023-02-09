@@ -65,6 +65,10 @@ gap: 5px;
   background-color: #3ea6ff;
   color: white;
 }
+
+@media (max-width: 768px) {
+  display: none;
+}
 `;
 const User = styled.div`
 display: flex;

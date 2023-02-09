@@ -9,6 +9,9 @@ const Container = styled.div`
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
+
+@media (max-width: 768px) {
+}
 `;
 
 const Header = styled.h1`

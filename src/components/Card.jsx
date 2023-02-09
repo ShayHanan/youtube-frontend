@@ -9,7 +9,13 @@ width: ${(props) => props.type !== "sm" && "296px"};
 height: ${(props) => props.type !== "sm" && "287px"};
 margin: ${(props) => props.type === "sm" ? "10px" : ("0px 15px 35px 0px")};
 display: ${(props) => props.type === "sm" && "flex"};
-gap: ${(props) => props.type === "sm" && "10px"}
+gap: ${(props) => props.type === "sm" && "10px"};
+
+@media (max-width: 768px) {
+  width: ${(props) => props.type !== "sm" && "100%"};
+  margin: ${(props) => props.type === "sm" ? "10px" : "0px"};
+
+}
 `;
 const Img = styled.img`
 width: ${(props) => props.type === "sm" ? "168px" : "100%"};
@@ -18,7 +24,11 @@ background-color: #999;
 gap: 10px;
 border-radius: 10px;
 flex: 1;
-cursor: pointer;    
+cursor: pointer;   
+
+@media (max-width: 768px) {
+  border-radius: 0px;  
+}
 `;
 
 const Details = styled.div`
