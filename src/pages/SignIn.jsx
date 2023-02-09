@@ -76,6 +76,7 @@ const SignIn = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isRegistered, setIsRegistered] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -112,7 +113,7 @@ const SignIn = () => {
     e.preventDefault();
     try {
       await axiosInstance.post("auth/signup", { name, email, password });
-      navigate("/signin");
+      setIsRegistered(true);
     } catch (error) {
 
     }
@@ -132,6 +133,7 @@ const SignIn = () => {
         <Input placeholder="email" onChange={e => setEmail(e.target.value)} />
         <Input type="password" placeholder="password" onChange={e => setPassword(e.target.value)} />
         <Button onClick={handleRegister}>Sign Up</Button>
+        {isRegistered && <span style={{ "color": "green" }}>User Has been created!</span>}
       </Wrapper>
       <More>
         English(USA)
