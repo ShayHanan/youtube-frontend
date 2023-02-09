@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-    baseURL: "http://shaytube-api.onrender.com"
+    baseURL: "https://shaytube-api.onrender.com"
 });
