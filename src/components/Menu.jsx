@@ -16,7 +16,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { axiosInstance } from "../config";
 
@@ -33,9 +33,11 @@ height: 100%;
 top: 0; /* Stay at the top */
 left: 0;
 width: 216px;
+z-index: 999;
 
 @media (max-width: 768px) {
     width: 90px;
+    padding-top: 30px;
 }
 
 &::-webkit-scrollbar {
@@ -157,6 +159,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
   const [err, setErr] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
 
 
   useEffect(() => {
@@ -184,14 +187,8 @@ const Menu = ({ darkMode, setDarkMode }) => {
   };
 
   return (
-    <Container>
+    <Container style={{ "display": location.pathname.split("/")[1] !== "video" ? "" : "none" }}>
       <Wrapper>
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          <Logo>
-            <Img src={Tube} />
-            ShayTube
-          </Logo>
-        </Link>
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Item>
             <HomeIcon className="icon" />

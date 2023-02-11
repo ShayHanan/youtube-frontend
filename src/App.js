@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./utils/Theme";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Video from "./pages/Video";
 import SignIn from "./pages/SignIn";
@@ -15,10 +15,6 @@ import Tags from "./pages/Tags";
 
 
 const Container = styled.div`
-margin-left: 216px;
-@media (max-width: 768px) {
-    margin-left: 90px;
-}
 `;
 
 const Main = styled.div`

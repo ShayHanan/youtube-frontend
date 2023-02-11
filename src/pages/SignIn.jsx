@@ -9,6 +9,7 @@ import { axiosInstance } from "../config";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
+margin-left: 216px;
 display: flex;
 flex-direction: column;
 align-items: center;

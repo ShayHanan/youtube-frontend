@@ -7,6 +7,10 @@ import { axiosInstance } from "../config";
 
 
 const Container = styled.div`
+margin-left: 216px;
+@media (max-width: 768px) {
+  margin-left: 90px;
+}
 display: flex;
 flex-wrap: wrap;
 gap: 10px;

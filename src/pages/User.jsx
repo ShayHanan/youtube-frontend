@@ -5,11 +5,19 @@ import Card from "../components/Card";
 import { axiosInstance } from "../config";
 
 const Container = styled.div`
+margin-left: 216px;
+@media (max-width: 768px) {
+  margin-left: 90px;
+}
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 `;
 const Header = styled.h1`
+margin-left: 216px;
+@media (max-width: 768px) {
+  margin-left: 90px;
+}
 color: ${({ theme }) => theme.text};
 margin-bottom: 10px;
 
